@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.dao.UserDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	<!-- 查询用户和密码进行登录 -->
+	<select id="findByUsername" resultType="com.sy.entity.User">
+	
+		select * from user where username = #{username}
+			
+	</select>
+	
+	<select id="findAllWork" resultType="com.sy.entity.Work">
+	
+		select * from work
+			
+	</select>
+	
+	<select id="addWork" resultType="com.sy.entity.Work">
+	
+		insert into work (workname,workcontent) values (#{workname},#{workcontent})  
+			
+	</select>
+	
+	<!-- <insert id="insertSalesChannel" parameterType="java.util.List">  
+	
+       	insert into user(username,password) values  
+       	<foreach collection="list" item="item" index="index" separator=",">  
+        	(#{item.username},#{item.password})  
+       	</foreach>  
+   	</insert>   -->
+	
+	<!-- 增加用户名和密码进行注册  -->
+	 <insert id="insertSalesChannel" parameterType="java.util.List">
+	    
+	    insert into user (username,password)
+	    values
+	    
+	    <foreach collection="list" item="item" index="index" separator=",">  
+	    
+        	(#{item.username},#{item.password})  
+
+       	</foreach> 
+	
+	</insert>
+	
+	<insert id="regist" parameterType="com.sy.entity.User">
+		insert into	user (username,password,usertype) values (#{username},#{password},#{usertype})	
+	</insert>
+	
+</mapper>	
