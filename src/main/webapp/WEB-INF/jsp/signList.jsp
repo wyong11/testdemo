@@ -24,286 +24,58 @@
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-    
+    <div class="row  border-bottom white-bg dashboard-header">
+        <div class="col-sm-12">
+			<p><a href="addsign">以往签到</a></p>
+        </div>
+        <!-- <div class="col-sm-4">
+			<p><a href="addmember">添加成员</a></p>
+        </div>
+        <div class="col-sm-4">
+			<p><a href="addmember">添加团队</a></p>
+        </div> -->
+
+    </div>
 		<!--右侧部分结束-->
         <!--右侧边栏开始-->
         <div class="gray-bg" style="margin-left: 0px">
    
  <div class="wrapper wrapper-content animated fadeInRight">
+        
         <div class="row">
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>152011班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--<div class="ibox-content">
-                        <div class="echarts" id="echarts-line-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>162011班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--<div class="ibox-content">
-
-                        <div class="echarts" id="echarts-bar-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>162021班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--<div class="ibox-content">
-                        <div class="echarts" id="echarts-scatter-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>162031班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--<div class="ibox-content">
-                        <div class="echarts" id="echarts-k-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>162041班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--<div class="ibox-content">
-                        <div class="echarts" id="echarts-pie-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>172031班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                   <!-- <div class="ibox-content">
-                        <div class="echarts" id="echarts-radar-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>162031班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--<div class="ibox-content">
-                        <div class="echarts" id="echarts-chord-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>162031班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--<div class="ibox-content">
-                        <div class="echarts" id="echarts-gauge-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>162031班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                   <!-- <div class="ibox-content">
-                        <div class="echarts" id="echarts-funnel-chart"></div>
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>162031班</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--<div class="ibox-content">
-                        <div class="echarts" id="echarts-force-chart"></div>
-                    </div>-->
-                </div>
-            </div>
+        	<div class="col-sm-12">
+        		<h5 style="float:left">签到历史</h5>
+        		<h5 style="margin-left:80px"><a href="addmember">发布签到</a></h5>
+        	</div>
+        	<c:forEach items="${list}" var="data" varStatus="status"> 
+	            <div class="col-sm-6">
+	                <div class="ibox float-e-margins">
+	                    <div class="ibox-title">
+	                        <%-- <h5><a href="getmembers?id=${data.username}">${data.username }</a></h5> --%>
+	                        <h5><a href="studentpage?username=${data.username}">${data.username }</a></h5>
+	                        <div class="ibox-tools">
+	                            <a class="collapse-link">
+	                                <i class="fa fa-chevron-up"></i>
+	                            </a>
+	                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+	                                <i class="fa fa-wrench"></i>
+	                            </a>
+	                            <ul class="dropdown-menu dropdown-user">
+	                                <li><a href="graph_flot.html#">选项1</a>
+	                                </li>
+	                                <li><a href="graph_flot.html#">选项2</a>
+	                                </li>
+	                            </ul>
+	                            <a class="close-link">
+	                                <i class="fa fa-times"></i>
+	                            </a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+           
+        	</c:forEach>
+        	
         </div>
 
     </div>

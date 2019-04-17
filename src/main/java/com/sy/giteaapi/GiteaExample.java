@@ -8,7 +8,7 @@ public class GiteaExample {
 	public static void main(String[] args) {
 		RestApi api = new GiteaRestApi();
 		String result = api.createBuilder()
-			.addAuthenticator("httpbasic", "teacher","teacher")
+			.addAuthenticator("httpbasic", "wy","123456")
 			.addSSL(new GiteaSSLFactory())
 			.buildClient()
 			//.execute("localhost",3000,"/api/v1/orgs/152011/teams","post","{\"description\":\"test\",\"name\":\"test\",\"permission\":\"read\",\"units\":[\"\"]}");
@@ -17,7 +17,8 @@ public class GiteaExample {
 			//.execute("localhost",3000,"/api/v1/orgs/152011/teams","post","{\"description\":\"152011 test\",\"name\":\"152011\",\"permission\":\"read\",\"units\":[\"\"]}");
 			
 			//.execute2("localhost",3000,"/api/v1/teams/6/members/student01","put");
-			.execute2("localhost",3000,"/api/v1/orgs/162011/members","get");
+			//.execute2("localhost",3000,"/api/v1/admin/orgs","get");
+			.execute2("localhost",3000,"/api/v1/orgs/152011/members","get");
 		/*
 		 * JSONObject json = JSON.parseObject(result);
 		 * System.out.println(json.get("username")); String username =

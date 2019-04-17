@@ -25,8 +25,8 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <%
-    	String content = (String)request.getAttribute("json");
-    out.println(content);
+    	String content = (String)request.getAttribute("tempString");
+    
     %>
 		<!--右侧部分结束-->
         <!--右侧边栏开始-->
@@ -37,7 +37,8 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5><input type="text" id="json" value="<%=content %>"> </h5>
+                        <h5><input type="text" id="content" name="content" value="<%=content %>"> </h5>
+                        <%-- <h5><textarea rows="20" cols="50"><%=content %></textarea> </h5> --%>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>

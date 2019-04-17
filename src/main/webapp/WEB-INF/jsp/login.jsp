@@ -40,10 +40,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             <form class="m-t" role="form" action="checkLogin" method="post" >
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="用户名" id="username" name="username">
+                    <input type="text" class="form-control" placeholder="用户名" id="name" name="name">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" id="password" name="password">
+                    <input type="password" class="form-control" placeholder="密码" id="email" name="email">
+                </div>
+                <div class="form-group text-left">
+                    <div class="checkbox i-checks">
+                        
+                            <input type="radio" name="isAdmin" value=1><i></i>教师
+                        
+                            <input type="radio" name="isAdmin" value=0 style="margin-left:30px"><i></i>学生
+                    </div>
+                    
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 

@@ -26,8 +26,17 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div class="row  border-bottom white-bg dashboard-header">
         <div class="col-sm-12">
-			<p><a href="">选择班级发布签到</a></p>
+			<p><a href="addmember">试卷信息</a></p>
         </div>
+        <div class="col-sm-4">
+			<p><a href="addquestion">添加试题</a></p>
+        </div>
+        <div class="col-sm-4">
+			<p><a href="addquestion">导入试题</a></p>
+        </div>
+        <!-- <div class="col-sm-4">
+			<p><a href="addmember">添加团队</a></p>
+        </div> -->
 
     </div>
 		<!--右侧部分结束-->
@@ -36,13 +45,38 @@
    
  <div class="wrapper wrapper-content animated fadeInRight">
         
-        <div class="row">
-        	
-        	<c:forEach items="${list}" var="data" varStatus="status"> 
+        <div class="row" style="overflow-x:hidden;overflow-y:auto">
+        	<form action="checkpaper" method="post" >
+        	<c:forEach items="${pcontent}" var="data" varStatus="status"> 
+	            <div class="col-sm-12">
+	                <div class="ibox float-e-margins">
+	                    <div class="ibox-title">
+	                       <h5>${data.title }、${data.question }</h5><br>
+	                        <div class="checkbox">
+	                            <input type="radio" name=${data.title } value=1>${data.answer1 }<br>
+	                            <input type="radio" name=${data.title } value=2>${data.answer2 }<br>
+	                            <input type="radio" name=${data.title } value=3>${data.answer3 }<br>
+	                            <input type="radio" name=${data.title } value=4>${data.answer4 }
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+           
+        	</c:forEach>
+        	<button type="submit" class="btn btn-primary block full-width m-b" style="width:20%!important;margin-left:400px">提交</button>
+        	</form>
+        	<%-- <div class="col-sm-12">
+        		
+        		<h5 style="float:left">组织团队</h5>
+        		<h5 style="margin-left:80px"><a href="addteam">添加团队</a></h5>
+        	</div>
+        	<c:forEach items="${list2}" var="data2" varStatus="status"> 
 	            <div class="col-sm-6">
 	                <div class="ibox float-e-margins">
 	                    <div class="ibox-title">
-	                        <h5><a href="signlist?username=${data.username}">${data.username }</a></h5>
+	                        <h5><a href="getmembers?id=${data.username}">${data.username }</a></h5>
+	                        <h5><a href="teammembers?id=${data2.id }"></a>${data2.name }</h5>
+	                       
 	                        <div class="ibox-tools">
 	                            <a class="collapse-link">
 	                                <i class="fa fa-chevron-up"></i>
@@ -64,7 +98,7 @@
 	                </div>
 	            </div>
            
-        	</c:forEach>
+        	</c:forEach> --%>
         </div>
 
     </div>

@@ -2,9 +2,11 @@ package com.sy.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -31,6 +35,9 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sy.entity.User;
 import com.sy.entity.Class;
 import com.sy.entity.Member;
+import com.sy.entity.Paper;
+import com.sy.entity.PaperContent;
+import com.sy.entity.PaperInfo;
 import com.sy.entity.Team;
 import com.sy.service.UserService;
 import com.sy.giteaapi.GitUtil;
@@ -60,15 +67,22 @@ public class UserController {
 
 	// 表单提交过来的路径
 	@RequestMapping("/checkLogin")
-	public String checkLogin(User user, Model model) {
+	public String checkLogin(User user,int isAdmin,Model model) {
 		// 调用service方法
-		user = userService.checkLogin(user.getUsername(), user.getPassword());
+		
+		user = userService.checkLogin(user.getName(),user.getEmail());
 		// 若有user则添加到model里并且跳转到成功页面
-		if (user != null) {
+		if (user != null && user.getIsAdmin() == isAdmin) {
 			model.addAttribute("user", user);
 			return "t_home";
-		} 
-		return "fail";
+		}
+		if(user != null && user.getIsAdmin() == isAdmin) {
+			model.addAttribute("user", user);
+			return "s_home";
+		} else {
+			return "fail";
+		}
+		
 	}
 	
 	//注册
@@ -79,7 +93,7 @@ public class UserController {
 
     @RequestMapping("/doRegist")
     public String doRegist(User user,Model model){
-        System.out.println(user.getUsername());
+        System.out.println(user.getName());
         userService.Regist(user);
         return "login";
     }
@@ -102,12 +116,12 @@ public class UserController {
 	public String hrefpage1_1(Model model) {
 		RestApi api = new GiteaRestApi();
 		String result = api.createBuilder()
-			.addAuthenticator("httpbasic","teacher","teacher")
+			.addAuthenticator("httpbasic","wy","123456")
 			.addSSL(new GiteaSSLFactory())
 			.buildClient()
 			//.execute("localhost",3000,"/api/v1/admin/users","post","{\"email\":\"2538934838@qq.com\", \"username\":\"zqwwr\",\"password\":\"123456\"}");
 		
-			.execute2("localhost",3000,"/api/v1/admin/orgs","get");
+			.execute("localhost",3000,"/api/v1/admin/orgs","get","");
 			
 			System.out.println(result);
 			List<Class> list = JSONObject.parseArray(result,Class.class);
@@ -138,12 +152,12 @@ public class UserController {
 		public String classlist(Model model) {
 			RestApi api = new GiteaRestApi();
 			String result = api.createBuilder()
-				.addAuthenticator("httpbasic","teacher","teacher")
+				.addAuthenticator("httpbasic","wy","123456")
 				.addSSL(new GiteaSSLFactory())
 				.buildClient()
 				//.execute("localhost",3000,"/api/v1/admin/users","post","{\"email\":\"2538934838@qq.com\", \"username\":\"zqwwr\",\"password\":\"123456\"}");
 			
-				.execute2("localhost",3000,"/api/v1/admin/orgs","get");
+				.execute("localhost",3000,"/api/v1/admin/orgs","get","");
 				
 				System.out.println(result);
 				List<Class> list = JSONObject.parseArray(result,Class.class);
@@ -199,32 +213,54 @@ public class UserController {
 	 * return "addSign"; }
 	 */
 
-	@RequestMapping("/signlist")
-	public String hrefpage6() {
-
-		return "signList";
-	}
-
+	/*
+	 * @RequestMapping("/signlist") public String hrefpage6() {
+	 * 
+	 * return "signList"; }
+	 */
 	@RequestMapping("/addexam")
 	public String addexam(String url,String localurl,HttpServletRequest request) throws IOException {
-		/*
-		 * GitUtil gitUtil = new GitUtil(); gitUtil.cloneRepository(url,localurl); File
-		 * file = new File(localurl);
-		 */
+		
 		File file = new File("C:/Users/wyong/Desktop/copy/copy.java");
 		FileReader fileReader = new FileReader(file);  
         BufferedReader bReader = new BufferedReader(fileReader);  
           
-        String tempString = null;  
-        while ( (tempString = bReader.readLine()) != null ) {  
-            System.out.println(tempString);  
+        //String tempString = null; 
+        int num = 0;
+        char ch;
+        while ( (num = bReader.read()) != -1 ) {  
+        	ch = (char) num;
+            System.out.print(ch);
+           // System.out.println(tempString);  
+            request.setAttribute("tempString",ch);
         }  
         
         bReader.close();  
         fileReader.close();  
    	
-   	 	request.setAttribute("tempString",tempString);
+   	 	
         
+		return "addExam";
+	}
+	@RequestMapping("/addexam2")
+	public String addexam2(String url,String localurl,HttpServletRequest request) throws IOException {
+		
+		/*
+		 * File file = new File("C:/Users/wyong/Desktop/copy/copy.java"); FileReader
+		 * fileReader = new FileReader(file); BufferedReader bReader = new
+		 * BufferedReader(fileReader);
+		 */
+          
+        StringBuilder texts =new StringBuilder();    
+        InputStreamReader isr = new InputStreamReader(new FileInputStream("C:/Users/wyong/Desktop/copy/copy.java"), "UTF-8");//加上编码转换
+        BufferedReader br = new BufferedReader(isr);
+        String line = null;  
+        while ((line = br.readLine()) != null) {   
+              texts.append(line);  
+              System.out.println(line);
+         	 	request.setAttribute("tempString",line);
+        }  
+        br.close();
 		return "addExam";
 	}
 
@@ -252,21 +288,6 @@ public class UserController {
 	 * return "success"; }
 	 */
 
-	@RequestMapping(value = "/emp01", method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
-	public String empAdd02(@RequestBody List<User> list) {
-		for (User e : list) {
-			// employeeMapper.insert(e);
-			try {
-				Object user = userService.insertSalesChannel(list);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		return "{\"msg\":\"success\"}";
-	}
-
 	/*
 	 * @RequestMapping("registerInfo") public String
 	 * register(@RequestParam("username") int username, @RequestParam("userNum") int
@@ -285,11 +306,11 @@ public class UserController {
 	 public String adduser(HttpServletRequest request) {
 		 RestApi api = new GiteaRestApi();
 		 String result = api.createBuilder()
-				 .addAuthenticator("httpbasic","teacher","teacher")
+				 .addAuthenticator("httpbasic","wy","123456")
 				 .addSSL(new GiteaSSLFactory()) .buildClient()
 	 //.execute("localhost",3000,"/api/v1/admin/users","post","{\"email\":\"2538934830@qq.com\", \"username\":\"zqw\",\"password\":\"123456\"}");
 	 
-				 .execute2("localhost",3000,"/api/v1/orgs/162011","get");
+				 .execute("localhost",3000,"/api/v1/orgs/162011","get","");
 	 
 	 System.out.println(result);
 	 JSONObject json = JSON.parseObject(result);
@@ -306,7 +327,7 @@ public class UserController {
 	 public String addClass(HttpServletRequest request,String username,String fullname,String description) {
 		 RestApi api = new GiteaRestApi();
 		 String result = api.createBuilder()
-				 .addAuthenticator("httpbasic","teacher","teacher")
+				 .addAuthenticator("httpbasic","wy","123456")
 				 .addSSL(new GiteaSSLFactory()) .buildClient()
 	 //.execute("localhost",3000,"/api/v1/admin/users","post","{\"email\":\"2538934830@qq.com\", \"username\":\"zqw\",\"password\":\"123456\"}");
 	 
@@ -327,7 +348,7 @@ public class UserController {
 	public String adduser2(HttpServletRequest request) {
 		RestApi api = new GiteaRestApi();
 		String result = api.createBuilder()
-			.addAuthenticator("httpbasic","teacher","teacher")
+			.addAuthenticator("httpbasic","wy","123456")
 			.addSSL(new GiteaSSLFactory())
 			.buildClient()
 			//.execute("localhost",3000,"/api/v1/admin/users","post","{\"email\":\"2538934838@qq.com\", \"username\":\"zqwwr\",\"password\":\"123456\"}");
@@ -349,11 +370,11 @@ public class UserController {
 	 public String getMembers(String username,Model model) {
 		 RestApi api = new GiteaRestApi();
 		 String result = api.createBuilder()
-				 .addAuthenticator("httpbasic","teacher","teacher")
+				 .addAuthenticator("httpbasic","wy","123456")
 				 .addSSL(new GiteaSSLFactory()) .buildClient()
 				 .execute2("localhost",3000,"/api/v1/orgs/"+username+"/members","get");
 		 String result2 = api.createBuilder()
-				 .addAuthenticator("httpbasic","teacher","teacher")
+				 .addAuthenticator("httpbasic","wy","123456")
 				 .addSSL(new GiteaSSLFactory()) .buildClient()
 				 .execute2("localhost",3000,"/api/v1/orgs/"+username+"/teams","get");
 		 	System.out.println(result);
@@ -379,7 +400,7 @@ public class UserController {
 		 public String addTeam(HttpServletRequest request,String id,String name,String description) {
 			 RestApi api = new GiteaRestApi();
 			 String result = api.createBuilder()
-					 .addAuthenticator("httpbasic","teacher","teacher")
+					 .addAuthenticator("httpbasic","wy","123456")
 					 .addSSL(new GiteaSSLFactory()) .buildClient()
 		 //.execute("localhost",3000,"/api/v1/admin/users","post","{\"email\":\"2538934830@qq.com\", \"username\":\"zqw\",\"password\":\"123456\"}");
 		 
@@ -407,12 +428,12 @@ public class UserController {
 		 public String studentinfo(HttpServletRequest request,String username,Model model) {
 			 RestApi api = new GiteaRestApi();
 			 String result = api.createBuilder()
-					 .addAuthenticator("httpbasic","teacher","teacher")
+					 .addAuthenticator("httpbasic","wy","123456")
 					 .addSSL(new GiteaSSLFactory()) .buildClient()
 		 //.execute("localhost",3000,"/api/v1/admin/users","post","{\"email\":\"2538934830@qq.com\", \"username\":\"zqw\",\"password\":\"123456\"}");
 		 
 					 //.execute2("localhost",3000,"/api/v1/orgs/"+username+"/members","get");
-					 .execute2("localhost",3000,"/api/v1/teams/5/members/"+username+"","get");
+					 .execute("localhost",3000,"/api/v1/teams/5/members/"+username+"","get","");
 			 JSONObject json = JSON.parseObject(result);
 			 System.out.println(json.get("username"));
 			 System.out.println(json.get("id"));
@@ -441,7 +462,7 @@ public class UserController {
 		 public String addRepos(HttpServletRequest request,String username,String name,String description) {
 			 RestApi api = new GiteaRestApi();
 			 String result = api.createBuilder()
-					 .addAuthenticator("httpbasic","teacher","teacher")
+					 .addAuthenticator("httpbasic","wy","123456")
 					 .addSSL(new GiteaSSLFactory()) .buildClient()
 		 //.execute("localhost",3000,"/api/v1/admin/users","post","{\"email\":\"2538934830@qq.com\", \"username\":\"zqw\",\"password\":\"123456\"}");
 					 .execute("localhost",3000,"/api/v1/admin/users/"+username+"/repos","post","{\"descripotion\":\""+description+"\",\"name\":\""+name+"\",\"gitignores\":\"\",\"license\":\"\",\"readme\":\"\"}");
@@ -463,10 +484,10 @@ public class UserController {
 		public String e_classlist(Model model) {
 			RestApi api = new GiteaRestApi();
 			String result = api.createBuilder()
-				.addAuthenticator("httpbasic","teacher","teacher")
+				.addAuthenticator("httpbasic","wy","123456")
 				.addSSL(new GiteaSSLFactory())
 				.buildClient()
-				.execute2("localhost",3000,"/api/v1/admin/orgs","get");
+				.execute("localhost",3000,"/api/v1/admin/orgs","get","");
 				System.out.println(result);
 				List<Class> list = JSONObject.parseArray(result,Class.class);
 				model.addAttribute("list",list);
@@ -477,10 +498,10 @@ public class UserController {
 		public String s_classlist(Model model) {
 			RestApi api = new GiteaRestApi();
 			String result = api.createBuilder()
-				.addAuthenticator("httpbasic","teacher","teacher")
+				.addAuthenticator("httpbasic","wy","123456")
 				.addSSL(new GiteaSSLFactory())
 				.buildClient()
-				.execute2("localhost",3000,"/api/v1/admin/orgs","get");
+				.execute("localhost",3000,"/api/v1/admin/orgs","get","");
 				System.out.println(result);
 				List<Class> list = JSONObject.parseArray(result,Class.class);
 				model.addAttribute("list",list);
@@ -492,13 +513,13 @@ public class UserController {
 		 public String e_getMembers(String username,Model model) {
 			 RestApi api = new GiteaRestApi();
 			 String result = api.createBuilder()
-					 .addAuthenticator("httpbasic","teacher","teacher")
+					 .addAuthenticator("httpbasic","wy","123456")
 					 .addSSL(new GiteaSSLFactory()) .buildClient()
-					 .execute2("localhost",3000,"/api/v1/orgs/"+username+"/members","get");
+					 .execute("localhost",3000,"/api/v1/orgs/"+username+"/members","get","");
 			 String result2 = api.createBuilder()
-					 .addAuthenticator("httpbasic","teacher","teacher")
+					 .addAuthenticator("httpbasic","wy","123456")
 					 .addSSL(new GiteaSSLFactory()) .buildClient()
-					 .execute2("localhost",3000,"/api/v1/orgs/"+username+"/teams","get");
+					 .execute("localhost",3000,"/api/v1/orgs/"+username+"/teams","get","");
 			 	System.out.println(result);
 				List<Member> list = JSONObject.parseArray(result,Member.class);
 				model.addAttribute("list",list);
@@ -513,13 +534,13 @@ public class UserController {
 		 public String s_getMembers(String username,Model model) {
 			 RestApi api = new GiteaRestApi();
 			 String result = api.createBuilder()
-					 .addAuthenticator("httpbasic","teacher","teacher")
+					 .addAuthenticator("httpbasic","wy","123456")
 					 .addSSL(new GiteaSSLFactory()) .buildClient()
-					 .execute2("localhost",3000,"/api/v1/orgs/"+username+"/members","get");
+					 .execute("localhost",3000,"/api/v1/orgs/"+username+"/members","get","");
 			 String result2 = api.createBuilder()
-					 .addAuthenticator("httpbasic","teacher","teacher")
+					 .addAuthenticator("httpbasic","wy","123456")
 					 .addSSL(new GiteaSSLFactory()) .buildClient()
-					 .execute2("localhost",3000,"/api/v1/orgs/"+username+"/teams","get");
+					 .execute("localhost",3000,"/api/v1/orgs/"+username+"/teams","get","");
 			 	System.out.println(result);
 				List<Member> list = JSONObject.parseArray(result,Member.class);
 				model.addAttribute("list",list);
@@ -545,5 +566,53 @@ public class UserController {
 				
 				return "s_showMembers";
 		 }
+		//签到列表
+		@RequestMapping("/signlist")
+		 public String signliist(Model model) {
+			 
+				
+				
+				return "signList";
+		 }
+		
+		//获取试卷列表
+		@RequestMapping("/paperlist")
+		public String getpaperlist(Model model) {
+			List<PaperInfo> plist = userService.findAllPaper();
+			model.addAttribute("paperList",plist);
+			return "showpapers";
+		 }
+		
+		//获取试卷内容
+	/*
+	 * @RequestMapping("/papercontent/{pid}") public ModelAndView
+	 * getpapercontent(@PathVariable("pid") int pid) { ModelAndView model = new
+	 * ModelAndView(); model.setViewName("/userLogin/papercontent"); PaperContent
+	 * papercontent = userService.findPaperContent(pid); model.addObject("pcontent",
+	 * papercontent);
+	 * 
+	 * return model; }
+	 */
+		@RequestMapping("/papercontent")
+		public String getpapercontent(Model model) {
+		/*
+		 * ModelAndView model = new ModelAndView();
+		 * model.setViewName("/userLogin/papercontent");
+		 */
+			List<PaperContent> papercontent = userService.findPaperContent();
+			model.addAttribute("pcontent", papercontent);
+			
+			return "papercontent";
+		 }	
+		
+		@RequestMapping("/addquestion")
+		public String addquestion(Model model) {
+			return "addQuestion";
+		}
+		//发布签到
+		@RequestMapping("/addpaper")
+		public String addpaper(Model model) {
+			return "addPaper";
+		}
 		
 }

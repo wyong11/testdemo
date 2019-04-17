@@ -4,20 +4,28 @@ import java.util.List;
 
 public class User {
 	
-	private String username;
-	
+	private int id;
+	private String name;
 	private String password;
-	
-	private int usertype;
+	private String email;
+	private int type;
+	private int isAdmin;
 	
 	public List<User> list;
-	
-	public String getUsername() {
-		return username;
+	public int getId() {
+		return id;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -28,11 +36,35 @@ public class User {
 		this.password = password;
 	}
 
-	public int getUsertype() {
-		return usertype;
+	public int getType() {
+		return type;
 	}
 
-	public void setUsertype(int usertype) {
-		this.usertype = usertype;
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public List<User> getList() {
+		return list;
+	}
+
+	public void setList(List<User> list) {
+		this.list = list;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -35,7 +35,7 @@ public class GiteaRestApi implements RestApi {
 
 	@Override
 	public RestApi addSSL(SSLFactory ssl) {
-		protocol = "https";
+		protocol = "http";
 		builder.readTimeout(10000, TimeUnit.MILLISECONDS)
         .writeTimeout(10000, TimeUnit.MILLISECONDS)
         .connectTimeout(10000, TimeUnit.MILLISECONDS)
@@ -117,29 +117,30 @@ public class GiteaRestApi implements RestApi {
 		return null;
 	}
 
-	@Override
-	public String execute2(String host,int port,String uri,String method) {
-		String url = formatUrl(host,port,uri);	
-		Request request=null;
-		RequestBody requestBody = new FormBody.Builder().build();
-		switch(method) {
-		case "get":
-			request = new Request.Builder().url(url).build();
-			break;
-		case "post":			
-			request = new Request.Builder().url(url).post(requestBody).build();
-			break;
-		case "delete":			
-			request = new Request.Builder().url(url).post(requestBody).build();
-			break;
-		case "put":			
-			request = new Request.Builder().url(url).post(requestBody).build();
-			break;
-		case "patch":			
-			request = new Request.Builder().url(url).post(requestBody).build();
-			break;
-		}		
-		return getResponse(request);		
-	}
+	 @Override
+		public String execute2(String host,int port,String uri,String method) {
+			String url = formatUrl(host,port,uri);	
+			Request request=null;
+			RequestBody requestBody = new FormBody.Builder().build();
+			switch(method) {
+			case "get":
+				request = new Request.Builder().url(url).build();
+				break;
+			case "post":			
+				request = new Request.Builder().url(url).post(requestBody).build();
+				break;
+			case "delete":			
+				request = new Request.Builder().url(url).post(requestBody).build();
+				break;
+			case "put":			
+				request = new Request.Builder().url(url).post(requestBody).build();
+				break;
+			case "patch":			
+				request = new Request.Builder().url(url).post(requestBody).build();
+				break;
+			}		
+			return getResponse(request);		
+		}
+	 
 
 }

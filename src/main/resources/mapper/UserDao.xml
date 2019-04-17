@@ -7,13 +7,30 @@
 	<!-- 查询用户和密码进行登录 -->
 	<select id="findByUsername" resultType="com.sy.entity.User">
 	
-		select * from user where username = #{username}
+		select * from user where name = #{name}
 			
 	</select>
 	
 	<select id="findAllWork" resultType="com.sy.entity.Work">
 	
 		select * from work
+			
+	</select>
+	
+	<select id="findAllPaper" resultType="com.sy.entity.PaperInfo">
+	
+		select * from paperInfo
+			
+	</select>
+	
+	<!-- <select id="findPaperContent" resultType="com.sy.entity.PaperContent">
+	
+		select * from papercontent where pid = #{pid}
+			
+	</select> -->
+	<select id="findPaperContent" resultType="com.sy.entity.PaperContent">
+	
+		select * from papercontent
 			
 	</select>
 	

@@ -26,7 +26,7 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div class="row  border-bottom white-bg dashboard-header">
         <div class="col-sm-12">
-			<p><a href="addmember">发布考试内容</a></p>
+			<p><a href="addmember2">发布考试内容</a></p>
         </div>
         <!-- <div class="col-sm-4">
 			<p><a href="addmember">添加成员</a></p>

@@ -26,8 +26,14 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div class="row  border-bottom white-bg dashboard-header">
         <div class="col-sm-12">
-			<p><a href="">选择班级发布签到</a></p>
+			<p><a href="addmember">试卷列表</a></p>
         </div>
+        <!-- <div class="col-sm-4">
+			<p><a href="addmember">添加成员</a></p>
+        </div>
+        <div class="col-sm-4">
+			<p><a href="addmember">添加团队</a></p>
+        </div> -->
 
     </div>
 		<!--右侧部分结束-->
@@ -37,12 +43,40 @@
  <div class="wrapper wrapper-content animated fadeInRight">
         
         <div class="row">
+        	<div class="col-sm-12">
+        		<h5 style="float:left">试卷列表</h5>
+        		<h5 style="margin-left:80px"><a href="addpaper">添加试卷</a></h5>
+        	</div>
         	
-        	<c:forEach items="${list}" var="data" varStatus="status"> 
+        	<c:forEach items="${paperList}" var="data" varStatus="status"> 
 	            <div class="col-sm-6">
 	                <div class="ibox float-e-margins">
 	                    <div class="ibox-title">
-	                        <h5><a href="signlist?username=${data.username}">${data.username }</a></h5>
+	                        <%-- <h5><a href="getmembers?id=${data.username}">${data.username }</a></h5> --%>
+	                        <h5><a href="papercontent">${data.pname }</a></h5><br><br>
+	                        <h5>考试时间：${data.ptime }</h5>
+	                        <h5 style="margin-left:50px">总分：${data.pscore }</h5><br>
+	                        <div class="ibox-tools">
+	                            
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+           
+        	</c:forEach>
+        	
+        	<%-- <div class="col-sm-12">
+        		
+        		<h5 style="float:left">组织团队</h5>
+        		<h5 style="margin-left:80px"><a href="addteam">添加团队</a></h5>
+        	</div>
+        	<c:forEach items="${list2}" var="data2" varStatus="status"> 
+	            <div class="col-sm-6">
+	                <div class="ibox float-e-margins">
+	                    <div class="ibox-title">
+	                        <h5><a href="getmembers?id=${data.username}">${data.username }</a></h5>
+	                        <h5><a href="teammembers?id=${data2.id }"></a>${data2.name }</h5>
+	                       
 	                        <div class="ibox-tools">
 	                            <a class="collapse-link">
 	                                <i class="fa fa-chevron-up"></i>
@@ -64,7 +98,7 @@
 	                </div>
 	            </div>
            
-        	</c:forEach>
+        	</c:forEach> --%>
         </div>
 
     </div>

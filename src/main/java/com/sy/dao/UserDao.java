@@ -1,9 +1,13 @@
 package com.sy.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.sy.entity.Paper;
+import com.sy.entity.PaperContent;
+import com.sy.entity.PaperInfo;
 import com.sy.entity.User;
 
 public interface UserDao {
@@ -15,7 +19,7 @@ public interface UserDao {
 	 * @param password 密码
 	 * @return
 	 */
-	User findByUsername(String username);
+	User findByUsername(String name);
 	
 	int addUser(User user);
 
@@ -29,4 +33,9 @@ public interface UserDao {
 	 */
 	void regist(@Param("username")String username,@Param("password")String password,@Param("usertype")int usertype);
 	
+	List<PaperInfo> findAllPaper();
+	
+	//PaperContent findPaperContent(int pid);
+	List<PaperContent> findPaperContent();
+
 }
