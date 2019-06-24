@@ -24,6 +24,12 @@
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+
+		<%
+        	String username = (String)request.getSession().getAttribute("username");
+        	String classname = username.substring(0,6);
+        	
+        %>
     <div id="wrapper">
         <!--左侧导航开始-->
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -97,15 +103,16 @@
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="classlist_work">提交作业</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="worklist">作业列表</a>
-                            </li>
                             <!-- <li>
-                                <a class="J_menuItem" href="worklist">作业分析</a>
+                                <a class="J_menuItem" href="classlist_work">提交作业</a>
                             </li> -->
+                            <li>
+                                <a class="J_menuItem" href="courseByClass?classname=<%=classname %>">作业列表</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="myworkstatus?username=<%=username %>">完成情况</a>
+                            </li>
+                           
                         </ul>
                     </li>
                     
@@ -117,10 +124,18 @@
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="signlist">签到列表</a>
+                                <!-- <a class="J_menuItem" href="s_signlist">签到列表</a> -->
+                                <a class="J_menuItem" href="signlistByClass?classname=<%=classname%>">签到列表</a>
+                                
                             </li>
-                            <li>
+                           <!--  <li>
                                 <a class="J_menuItem" href="s_sign">开始签到</a>
+                            </li> -->
+                            <!-- <li>
+                                <a class="J_menuItem" href="signstatuslist">签到历史</a>
+                            </li> -->
+                            <li>
+                                <a class="J_menuItem" href="mysignstatus?username=<%=username %>">签到历史</a>
                             </li>
                         </ul>
                     </li>
@@ -131,12 +146,15 @@
                             <span class="nav-label">考试信息</span>
                             <span class="fa arrow"></span>
                         </a>
-                        <ul class="nav nav-second-level">
+                        <ul class="nav nav-second-level"> 
                             <li>
-                            	<a class="J_menuItem" href="e_classlist">考试内容</a>
+                            	<a class="J_menuItem" href="examlistByClass?classname=<%=classname%>">开卷考试</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="paperlist">我的成绩</a>
+                            	<a class="J_menuItem" href="eCloseByClass?classname=<%=classname%>">闭卷考试</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="mygrade?username=<%=username %>">我的成绩</a>
                             </li>
                         </ul>
                     </li>
@@ -147,7 +165,7 @@
         <!--右侧部分开始-->
         <div id="page-wrapper" class="gray-bg dashbard-1" >
             <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom:0">
                     <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                         <!--<form role="search" class="navbar-form-custom" method="post" action="http://www.zi-han.net/theme/hplus/search_results.html">
                             <div class="form-group">

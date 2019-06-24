@@ -14,8 +14,8 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 public class JgitTest {
-	public static String remotePath = "http://localhost:3000/teacher/testgit.git";//远程库路径
-	public static String localPath = "D:\\git\\";//下载已有仓库到本地路径
+	public static String remotePath = "http://localhost:3000/16201101/16201101.git";//远程库路径
+	public static String localPath = "D:/project";//下载已有仓库到本地路径
 	
 	/**
 	  * 仓库初始化
@@ -59,9 +59,9 @@ public class JgitTest {
 	 * @throws IOException
 	 * @throws GitAPIException
 	 */
-	public static void gitAdd() throws IOException, GitAPIException {
+	public static void gitAdd(String path) throws IOException, GitAPIException {
 	    Git git = new Git(new FileRepository(localPath + "/.git"));
-	    git.add().addFilepattern(".").call();
+	    git.add().addFilepattern(path).call();
 	    System.err.println("git add success");
 	}
 	/**
@@ -84,27 +84,27 @@ public class JgitTest {
 	 * @throws IOException
 	 * @throws GitAPIException
 	 */
-	public static void gitPush(String branch,String userName,String passWord) throws IOException, GitAPIException {
+	public static void gitPush(String userName,String passWord) throws IOException, GitAPIException {
 	    UsernamePasswordCredentialsProvider usernamePasswordCredentialsProvider =new
 	               UsernamePasswordCredentialsProvider(userName,passWord);
 	    //git仓库地址
 	    Git git = new Git(new FileRepository(localPath+"/.git"));
 	 
 	    //检查新建的分支是否已经存在，如果存在则将已存在的分支强制删除并新建一个分支
-	    List<Ref> refs = git.branchList().call();
-	    for (Ref ref : refs) {
-	    	System.out.println(ref.getName());
-	        if (ref.getName().equals("refs/heads/"+branch)) {
-	            System.out.println("Removing branch before");
-	            git.branchDelete().setBranchNames(branch).setForce(true)
-	                        .call();
-	            break;
-	        }
-	    }
+	    //List<Ref> refs = git.branchList().call();
+	    //for (Ref ref : refs) {
+	    //	System.out.println(ref.getName());
+	     //   if (ref.getName().equals("refs/heads/"+branch)) {
+	      //      System.out.println("Removing branch before");
+	      //      git.branchDelete().setBranchNames(branch).setForce(true)
+	      //                  .call();
+	      //      break;
+	     //   }
+	   // }
 	    //新建分支
-	    Ref ref = git.branchCreate().setName(branch).call();
+	    //Ref ref = git.branchCreate().setName(branch).call();
 	    //推送到远程
-	     git.push().add(ref).setCredentialsProvider(usernamePasswordCredentialsProvider).call();
+	     git.push().setRemote("origin").setCredentialsProvider(usernamePasswordCredentialsProvider).call();
 	 
 	    /*git.push().setRemote("origin/"+branch)
 	                .setCredentialsProvider(usernamePasswordCredentialsProvider).call();*/
@@ -128,27 +128,29 @@ public class JgitTest {
 	}
 	
 	public static void main(String[] args){
-	    String remotePath = "http://localhost:3000/teacher/testgit.git";
+	    //String remotePath = "http://localhost:3000/wy/wy.git";
 	    String branch = "master";
-	    String userName = "teacher";
-	    String passWord = "teacher";
+	    String userName = "16201101";
+	    String passWord = "123456";
+	    String path = "F:/gittest.txt";
 	 
-	    String msg = "";
+	    String msg = "first try";
 	    
-		try {
-			filesDelete(new File(localPath).listFiles());
-			//gitInit();
-			gitClone(remotePath,branch,userName,passWord);
-			//添加要提交的新文件
-			//gitAdd();
-			//gitCommit(msg);
-			//filesDelete(new File(localPath).listFiles());
-			//gitPush("jgittest",userName,passWord);
-		} catch (GitAPIException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-}
-
+	    try {
+	   	 filesDelete(new File(localPath).listFiles());
+	   	 gitInit();
+	   	 gitClone(remotePath, branch, userName, passWord);
+	   	 // 添加要提交的新文件
+	   	 gitAdd(path);
+	   	 gitCommit(msg);
+	   	 // filesDelete(new File(localPath).listFiles());
+	   	  gitPush(userName,passWord);
+	   	 } catch (GitAPIException e) {
+	   	 // TODO Auto-generated catch block
+	   	 e.printStackTrace();
+	   	 } catch (IOException e) {
+	   		// TODO Auto-generated catch block
+	   		e.printStackTrace();
+	   	}
+	   	}
+	   }

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.sy.entity.Paper;
 import com.sy.entity.PaperContent;
 import com.sy.entity.PaperInfo;
+import com.sy.entity.Sign;
 import com.sy.entity.User;
 
 //Service层接口
@@ -22,5 +23,8 @@ public interface UserService {
 	
 	//public PaperContent findPaperContent(int pid);
 	public List<PaperContent> findPaperContent();
+	
+	public List<Sign> findSignByClassname();
+	//Sign findSignByClassname(String classname);
 	
 }

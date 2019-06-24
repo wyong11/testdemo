@@ -32,5 +32,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/wyong/Downloads/tm-extractors-0.4-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/wyong/Downloads/tm-extractors-0.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

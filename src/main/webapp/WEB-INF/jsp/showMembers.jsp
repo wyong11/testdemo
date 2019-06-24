@@ -40,7 +40,7 @@
         <!--右侧边栏开始-->
         <div class="gray-bg" style="margin-left: 0px">
    
- <div class="wrapper wrapper-content animated fadeInRight">
+ <div class="wrapper wrapper-content animated fadeInRight" style="overflow:scroll; height:400px;">
         
         <div class="row">
         	<div class="col-sm-12">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -45,14 +46,101 @@
         <div class="row">
         	<div class="col-sm-12">
         		<h5 style="float:left">签到历史</h5>
-        		<h5 style="margin-left:80px"><a href="addmember">发布签到</a></h5>
+        		<h5 style="margin-left:80px"><a href="addsign">发布签到</a></h5>
         	</div>
-        	<c:forEach items="${list}" var="data" varStatus="status"> 
+        	<div class="col-sm-12">
+        		<table border="0" cellpadding="10" cellspacing="0" class="table table-striped">
+					<thead>
+						<tr>
+							<td>编号</td>
+							<td>签到名称</td>
+							<td>班级名</td>
+							<td>创建时间</td>
+							<td>结束时间</td>
+							<td>签到</td>
+						</tr>
+					</thead>
+					<c:forEach items="${sign }" var="sign">
+				        <tr>
+				            <td>${sign.id }</td>
+				            <td>${sign.name }</td>
+				            <td>${sign.className }</td>
+				            <td>${sign.creatTime }</td>
+				            <td>${sign.endTime }</td>
+				            
+				            <td>
+				            <fmt:parseDate value="${sign.endTime}" pattern="yyyy-MM-dd'T'HH:mm" var="receiveDate"></fmt:parseDate>
+          					<%-- <fmt:formatDate value="${receiveDate}" pattern="HHmmss" ></fmt:formatDate> --%>
+          					<%-- <fmt:formatDate value="${receiveDate}" pattern="yyyy-MM-dd'T'HH:mm"/>   --%>
+				            <c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set>
+							<c:choose>
+								<c:when test="${nowDate - receiveDate.getTime() > 0}">
+									<span class="STYLE1">签到已失效</span>
+									<a type="button"  href="findabsent?id=${sign.id }" class="btn btn-info btn-sm">
+                                	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                                                          点到信息
+                                </a>
+								</c:when>
+								<c:otherwise>
+									<span class="STYLE2">签到进行中</span>
+									<a type="button" href="findabsent?id=${sign.id }" class="btn btn-info btn-sm">
+                                	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                                                          开始点到
+                                </a>
+								</c:otherwise>
+							</c:choose>
+                                <%-- <a type="button"  href="${path}/user/getUser?id=${user.id}" class="btn btn-info btn-sm">
+                                	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                                                          签到
+                                </a> --%>
+                                <%-- <a type="button"  href="findabsent?id=${sign.id }" class="btn btn-info btn-sm">
+                                	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                                                          点到
+                                </a> --%>
+                                
+                            </td>
+				        </tr>
+				    </c:forEach>
+				</table>
+        		<div align="center"> 
+        <font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第 
+            ${page.pageNow} 页</font> <a href="${pageContext.request.contextPath}/signlist?pageNow=1">首页</a> 
+        <c:choose> 
+            <c:when test="${page.pageNow - 1 > 0}"> 
+                <a href="${pageContext.request.contextPath}/signlist?pageNow=${page.pageNow - 1}">上一页</a> 
+            </c:when> 
+            <c:when test="${page.pageNow - 1 <= 0}"> 
+                <a href="${pageContext.request.contextPath}/signlist?pageNow=1">上一页</a> 
+            </c:when> 
+        </c:choose> 
+        <c:choose> 
+            <c:when test="${page.totalPageCount==0}"> 
+                <a href="${pageContext.request.contextPath}/signlist?pageNow=${page.pageNow}">下一页</a> 
+            </c:when> 
+            <c:when test="${page.pageNow + 1 < page.totalPageCount}"> 
+                <a href="${pageContext.request.contextPath}/signlist?pageNow=${page.pageNow + 1}">下一页</a> 
+            </c:when> 
+            <c:when test="${page.pageNow + 1 >= page.totalPageCount}"> 
+                <a href="${pageContext.request.contextPath}/signlist?pageNow=${page.totalPageCount}">下一页</a> 
+            </c:when> 
+        </c:choose> 
+        <c:choose> 
+            <c:when test="${page.totalPageCount==0}"> 
+                <a href="${pageContext.request.contextPath}/signlist?pageNow=${page.pageNow}">尾页</a> 
+            </c:when> 
+            <c:otherwise> 
+                <a href="${pageContext.request.contextPath}/signlist?pageNow=${page.totalPageCount}">尾页</a> 
+            </c:otherwise> 
+        </c:choose> 
+    </div> 
+        	</div>
+        	
+        	<%-- <c:forEach items="${signlist}" var="data" varStatus="status"> 
 	            <div class="col-sm-6">
 	                <div class="ibox float-e-margins">
 	                    <div class="ibox-title">
-	                        <%-- <h5><a href="getmembers?id=${data.username}">${data.username }</a></h5> --%>
-	                        <h5><a href="studentpage?username=${data.username}">${data.username }</a></h5>
+	                        <h5><a href="getmembers?id=${data.username}">${data.username }</a></h5>
+	                        <h5>${data.name }</h5>
 	                        <div class="ibox-tools">
 	                            <a class="collapse-link">
 	                                <i class="fa fa-chevron-up"></i>
@@ -74,7 +162,7 @@
 	                </div>
 	            </div>
            
-        	</c:forEach>
+        	</c:forEach> --%>
         	
         </div>
 

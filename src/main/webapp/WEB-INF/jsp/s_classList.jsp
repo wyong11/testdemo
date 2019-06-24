@@ -42,7 +42,7 @@
 	            <div class="col-sm-6">
 	                <div class="ibox float-e-margins">
 	                    <div class="ibox-title">
-	                        <h5><a href="signlist?username=${data.username}">${data.username }</a></h5>
+	                        <h5><a href="signByClass?classname=${data.username}">${data.username }</a></h5>
 	                        <div class="ibox-tools">
 	                            <a class="collapse-link">
 	                                <i class="fa fa-chevron-up"></i>

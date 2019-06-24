@@ -109,11 +109,13 @@ public class GitUtil {
         GitUtil gitUtil = new GitUtil();
         //git远程url地址
         String url = "https://gitee.com/xiaoqing11/ssm.git";
-        String localPath = "C:/Users/wyong/Desktop/copy";
+        
+        String url2="http://localhost:3000/16201102/16201102.git";
+        String localPath = "C:/Users/wyong/Desktop/copy2";
       //  String localPath = System.getProperty("user.dir");
        // String branchName = "15201126_branch";
         try {
-            gitUtil.cloneRepository(url,localPath);
+            gitUtil.cloneRepository(url2,localPath);
 //            gitUtil.checkoutBranch(localPath,branchName);
            // gitUtil.commit(localPath,"测试提交1");
         } catch (Exception e) {

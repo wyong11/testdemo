@@ -1,27 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:16:41 GMT -->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>教学管理</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
-<body>
 
-	<div>
-		<strong> 欢迎,${sessionScope.user.username}! </strong>
-	</div>
-	This is success page!
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    <div class="row  border-bottom white-bg dashboard-header">
+        
 
-	<a href="/userLogin/user/insert">跳转</a>
+    </div>
+		<!--右侧部分结束-->
+        <!--右侧边栏开始-->
+        <div class="gray-bg" style="margin-left: 0px">
+   
+ <div class="wrapper wrapper-content animated fadeInRight">
+        
+        <div class="row">
+        	<div class="col-sm-4"></div>
+        	
+	            <div class="col-sm-4">
+	                <div class="ibox float-e-margins">
+	                    <div class="ibox-title">
+	                        <h5>操作成功</h5>
+	                        
+	                    </div>
+	                </div>
+	            </div>
+        	<div class="col-sm-4"></div>
+        </div>
 
-	<form action="/userLogin/user/outLogin">
-		<table>
-			<tr>
-				<td><input type="submit" value="退出登录"></td>
-			</tr>
-		</table>
-	</form>
+    </div>
+    
+        
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/plugins/layer/layer.min.js"></script>
+    <script src="js/hplus.min.js?v=4.1.0"></script>
+    <script type="text/javascript" src="js/contabs.min.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+    
 </body>
+<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>
+

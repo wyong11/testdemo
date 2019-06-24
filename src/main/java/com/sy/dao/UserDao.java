@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.sy.entity.Paper;
 import com.sy.entity.PaperContent;
 import com.sy.entity.PaperInfo;
+import com.sy.entity.Sign;
 import com.sy.entity.User;
 
 public interface UserDao {
@@ -37,5 +38,8 @@ public interface UserDao {
 	
 	//PaperContent findPaperContent(int pid);
 	List<PaperContent> findPaperContent();
+	
+	List<Sign> findSignByClassname();
+	//Sign findSignByClassname(String classname);
 
 }

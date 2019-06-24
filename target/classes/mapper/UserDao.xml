@@ -23,6 +23,12 @@
 			
 	</select>
 	
+	<select id="findSignByClassname" resultType="com.sy.entity.Sign">
+	
+		select * from sign where classname = #{name}
+			
+	</select>
+	
 	<!-- <select id="findPaperContent" resultType="com.sy.entity.PaperContent">
 	
 		select * from papercontent where pid = #{pid}

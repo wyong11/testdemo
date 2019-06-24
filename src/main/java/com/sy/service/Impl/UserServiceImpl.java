@@ -10,6 +10,7 @@ import com.sy.dao.UserDao;
 import com.sy.entity.Paper;
 import com.sy.entity.PaperContent;
 import com.sy.entity.PaperInfo;
+import com.sy.entity.Sign;
 import com.sy.entity.User;
 import com.sy.service.UserService;
 
@@ -56,5 +57,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.findPaperContent();
 	}
 
-	
+	@Override
+	public List<Sign> findSignByClassname() {
+		// TODO Auto-generated method stub
+		return userDao.findSignByClassname();
+	}
+
 }

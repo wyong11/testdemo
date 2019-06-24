@@ -4,9 +4,10 @@ public class Work {
 	
 	private String id;
 	private String workname;
+	private String classname;
+	private String coursename;
 	private String workcontent;
-	private String starttime;
-	private String endtime;
+	private String creattime;
 	public String getId() {
 		return id;
 	}
@@ -25,17 +26,23 @@ public class Work {
 	public void setWorkcontent(String workcontent) {
 		this.workcontent = workcontent;
 	}
-	public String getStarttime() {
-		return starttime;
+	public String getClassname() {
+		return classname;
 	}
-	public void setStarttime(String starttime) {
-		this.starttime = starttime;
+	public void setClassname(String classname) {
+		this.classname = classname;
 	}
-	public String getEndtime() {
-		return endtime;
+	public String getCoursename() {
+		return coursename;
 	}
-	public void setEndtime(String endtime) {
-		this.endtime = endtime;
+	public void setCoursename(String coursename) {
+		this.coursename = coursename;
+	}
+	public String getCreattime() {
+		return creattime;
+	}
+	public void setCreattime(String creattime) {
+		this.creattime = creattime;
 	}
 
 

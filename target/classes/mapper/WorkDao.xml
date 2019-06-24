@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.dao.WorkDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	<resultMap id="WorkMap" type="com.sy.entity.Work">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="workname" property="workname" jdbcType="VARCHAR" />
+		<result column="classname" property="classname" jdbcType="VARCHAR" />
+		<result column="coursename" property="coursename" jdbcType="VARCHAR" />
+		<result column="workcontent" property="workcontent" jdbcType="VARCHAR" />
+		<result column="creattime" property="creattime" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="WorkStatusMap" type="com.sy.entity.WorkStatus">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="workname" property="workname" jdbcType="VARCHAR" />
+		<result column="classname" property="classname" jdbcType="VARCHAR" />
+		<result column="coursename" property="coursename" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="StudentMap" type="com.sy.entity.Student">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="fullname" property="fullname" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	
+	<resultMap id="FilesMap" type="com.sy.entity.Files">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="classname" property="classname" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="filename" property="filename" jdbcType="VARCHAR" />
+		<result column="filecontent" property="filecontent" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 分页SQL语句 --> 
+    <select id="findWorkByPage" resultMap="WorkMap"> 
+        select * 
+        from work limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findWorkByCC" resultMap="WorkMap"> 
+        select * 
+        from work where classname = #{classname} and coursename = #{coursename} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findStudentByClassname" resultMap="StudentMap"> 
+        select * 
+        from student where classname = #{classname} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findWorkByClassname" resultMap="WorkMap"> 
+        select * 
+        from work where classname = #{classname} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findWSByUsername" resultMap="WorkStatusMap"> 
+        select * 
+        from work_status where username = #{username} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    <select id="findWSByCW" resultMap="WorkStatusMap"> 
+        select * 
+        from work_status where classname = #{classname} and workname = #{workname} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findWSByUW" resultType="com.sy.entity.WorkStatus"> 
+        select * 
+        from work_status where username = #{username} and workname = #{workname}
+    </select> 
+    
+    <select id="findFilesByUsername" resultMap="FilesMap"> 
+        select * 
+        from work_files where username = #{username} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findFCByUF" parameterType="String" resultType="com.sy.entity.Files"> 
+        select * 
+        from work_files where username = #{username} and filename = #{filename}
+    </select> 
+    
+    <insert id="addWorkFiles" parameterType="com.sy.entity.Files">
+         insert into work_files (classname,username,filename,filecontent) values (#{classname},#{username},#{filename},#{filecontent})
+    </insert> 
+    
+    <insert id="addWork" parameterType="com.sy.entity.Work" useGeneratedKeys="true" keyProperty="id">
+         insert into work (workname,classname,coursename,workcontent,creattime) values (#{workname},#{classname},#{coursename},#{workcontent},#{creattime})
+    </insert> 
+    
+    <insert id="addWorkStatus" parameterType="com.sy.entity.WorkStatus" useGeneratedKeys="true" keyProperty="id">
+         insert into work_status (workname,classname,coursename,username,status) values (#{workname},#{classname},#{coursename},#{username},#{status})
+    </insert> 
+    
+    <update id="updateWorkStatus" parameterType="com.sy.entity.WorkStatus">
+         
+    	 update work_status set status=#{status} where username=#{username} and workname=#{workname}
+    </update> 
+     
+    
+    
+    <!-- <insert id="addFiles" parameterType="com.sy.entity.Files">
+         insert into files (classname,username,filename,filecontent) values (#{classname},#{username},#{filename},#{filecontent})
+    </insert>  -->
+    
+    <!-- <insert id="addAnswers" parameterType="com.sy.entity.Answers" useGeneratedKeys="true" keyProperty="id">
+         insert into answers (examname,classname,coursename,username,answers) values (#{examname},#{classname},#{coursename},#{username},#{answers})
+    </insert>  -->
+    
+	
+	<!-- 取得记录的总数 --> 
+	<select id="getWorkCount" resultType="long">
+        SELECT COUNT(*) FROM work  
+	</select>
+	
+	<select id="getWorkByCC" resultType="long">
+        SELECT COUNT(*) FROM work where classname = #{classname} and coursename = #{coursename}
+	</select>
+	
+	<select id="getWCByClassname" resultType="long">
+        SELECT COUNT(*) FROM work where classname = #{classname}
+	</select>
+	
+	<select id="getStudentByClassname" resultType="long">
+        SELECT COUNT(*) FROM student where classname = #{classname}
+	</select>
+	
+	<select id="getWCByUsername" resultType="long">
+        SELECT COUNT(*) FROM work where username = #{username}
+	</select>
+	
+	<select id="getFilesByUsername" resultType="long">
+        SELECT COUNT(*) FROM work_files where username = #{username}
+	</select>
+	
+	<select id="getWSByCW0" resultType="long">
+        SELECT COUNT(*) FROM work_status where classname = #{classname} and workname =#{workname}
+	</select>
+	<select id="getWSByCW" resultType="long">
+        SELECT COUNT(*) FROM work_status where classname = #{classname} and workname =#{workname} and status = #{status}
+	</select>
+	
+	<select id="getWSByUsername" resultType="long">
+        SELECT COUNT(*) FROM work_status where username = #{username}
+	</select>
+	
+	
+	<!-- 查询一个班级的人数 -->
+	<select id="getExamNum" resultType="long">
+        SELECT COUNT(*) FROM org_user where org_id = #{id}
+	</select>
+	
+	
+</mapper>	

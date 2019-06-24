@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.dao.SignDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	<resultMap id="SignMap" type="com.sy.entity.Sign">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="className" property="className" jdbcType="VARCHAR" />
+		<result column="creatTime" property="creatTime" jdbcType="VARCHAR" />
+		<result column="endTime" property="endTime" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="SignStatusMap" type="com.sy.entity.SignStatus">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="signId" property="signId" jdbcType="INTEGER" />
+		<result column="signName" property="signName" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="seatnum" property="seatnum" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 分页SQL语句 --> 
+    <select id="selectSignByPage" resultMap="SignMap"> 
+        select * 
+        from sign limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="selectSignStatusByPage" resultMap="SignStatusMap"> 
+        select * 
+        from sign_status limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findAbsent" resultMap="SignStatusMap"> 
+        select *
+        from sign_status
+        where sign_id = #{id} limit #{startPos},#{pageSize} 
+       
+    </select> 
+    
+    <select id="selectSignByClassname" resultMap="SignMap"> 
+        select * 
+        from sign where classname = #{username} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="selectSSByUsername" resultMap="SignStatusMap"> 
+        select * 
+        from sign_status where username = #{username} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findSSByUS" resultType="com.sy.entity.SignStatus"> 
+        select * 
+        from sign_status where username = #{username} and sign_name = #{signName}
+    </select> 
+    
+    <select id="findSignById" parameterType="int" resultType="com.sy.entity.Sign"> 
+        select id,name,classname,creat_time,end_time 
+        from sign where id = #{id}   
+    </select> 
+    
+    
+    <insert id="addSign" parameterType="com.sy.entity.Sign" useGeneratedKeys="true" keyProperty="id">
+         insert into sign (name,classname,creat_time,end_time,stotal,roomtype) values (#{name},#{className},#{creatTime},#{endTime},#{stotal},#{roomtype})
+    </insert> 
+    
+    <insert id="addSignInitial" parameterType="com.sy.entity.SignStatus">
+         insert into sign_status (sign_id,sign_name,classname,coursename,username,seatnum,status) values (#{signId},#{signName},#{className},#{courseName},#{username},#{seatnum},#{status})
+    </insert> 
+    <insert id="addSignStatus" parameterType="com.sy.entity.SignStatus">
+         insert into sign_status (sign_id,sign_name,username,seatnum,status) values (#{signId},#{signName},#{username},#{seatnum},#{status})
+    </insert> 
+    
+    <update id="updateSignStatus" parameterType="com.sy.entity.SignStatus">
+         
+    	 update sign_status set username=#{username},seatnum=#{seatnum},status=#{status} where username=#{username} and sign_name = #{signName}
+    </update> 
+    
+    <select id="findSSByUsername" resultType="com.sy.entity.SignStatus"> 
+        select * 
+        from sign_status where username = #{username}    
+    </select> 
+	
+	<!-- 取得记录的总数 --> 
+	<select id="getSignCount" resultType="long">
+        SELECT COUNT(*) FROM sign  
+	</select>
+	<select id="getSCByName" resultType="long">
+        SELECT COUNT(*) FROM sign where classname = #{name}
+	</select>
+	<select id="getSignStatusCount" resultType="long">
+        SELECT COUNT(*) FROM sign_status  
+	</select>
+	<select id="getSSCById" resultType="long">
+        SELECT COUNT(*) FROM sign_status  where sign_id = #{id}
+	</select>
+	
+	<select id="getSSCByUsername" resultType="long">
+        SELECT COUNT(*) FROM sign_status  where username = #{username}
+	</select>
+	
+	<select id="getCountSign" resultType="long">
+        SELECT COUNT(*) FROM sign_status  where sign_id = #{id} and status = #{status}
+	</select>
+	
+	
+	
+	<!-- 查询一个班级的人数 -->
+	<select id="getSignNum" resultType="long">
+        SELECT COUNT(*) FROM org_user where org_id = #{id}
+	</select>
+	
+	
+	<select id="findSignByClassname" resultType="com.sy.entity.Sign">
+	
+		select * from sign where classname = #{name}
+			
+	</select>
+	
+</mapper>	

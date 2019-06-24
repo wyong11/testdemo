@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.dao.CourseDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	<resultMap id="CourseMap" type="com.sy.entity.Course">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="coursename" property="coursename" jdbcType="VARCHAR" />
+		<result column="teacher" property="teacher" jdbcType="VARCHAR" />
+		<result column="classname" property="classname" jdbcType="VARCHAR" />
+		<result column="stotal" property="stotal" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 分页SQL语句 --> 
+    <select id="findCourseByPage" resultMap="CourseMap"> 
+        select * 
+        from course limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findCourseByClassname" resultMap="CourseMap"> 
+        select * 
+        from course where classname = #{classname} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findCourseByTname" resultMap="CourseMap"> 
+        select * 
+        from course where teacher = #{teacher} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    
+    
+    <insert id="addCourse" parameterType="com.sy.entity.Course">
+         insert into course (coursename,teacher,classname,stotal) values (#{coursename},#{teacher},#{classname},#{stotal})
+    </insert> 
+    
+    <!-- <insert id="addWork" parameterType="com.sy.entity.Work" useGeneratedKeys="true" keyProperty="id">
+         insert into work (workname,classname,coursename,workcontent,creattime) values (#{workname},#{classname},#{coursename},#{workcontent},#{creattime})
+    </insert>  -->
+    
+     
+    
+    
+    <!-- <insert id="addFiles" parameterType="com.sy.entity.Files">
+         insert into files (classname,username,filename,filecontent) values (#{classname},#{username},#{filename},#{filecontent})
+    </insert>  -->
+    
+    <!-- <insert id="addAnswers" parameterType="com.sy.entity.Answers" useGeneratedKeys="true" keyProperty="id">
+         insert into answers (examname,classname,coursename,username,answers) values (#{examname},#{classname},#{coursename},#{username},#{answers})
+    </insert>  -->
+    
+	
+	<!-- 取得记录的总数 --> 
+	<select id="getCourseCount" resultType="long">
+        SELECT COUNT(*) FROM course  
+	</select>
+	
+	<select id="getCourseByClassname" resultType="long">
+        SELECT COUNT(*) FROM course where classname = #{classname}
+	</select>
+	
+	<select id="getCourseByTname" resultType="long">
+        SELECT COUNT(*) FROM course where teacher = #{teacher}
+	</select>
+	
+	
+	
+	<!-- 查询一个班级的人数 -->
+	<select id="getExamNum" resultType="long">
+        SELECT COUNT(*) FROM org_user where org_id = #{id}
+	</select>
+	
+	
+</mapper>	

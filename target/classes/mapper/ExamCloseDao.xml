@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.dao.ExamCloseDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	
+	<resultMap id="ExamCloseMap" type="com.sy.entity.ExamClose">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="examName" property="examName" jdbcType="VARCHAR" />
+		<result column="classname" property="classname" jdbcType="VARCHAR" />
+		<result column="coursename" property="coursename" jdbcType="VARCHAR" />
+		<result column="startTime" property="startTime" jdbcType="VARCHAR" />
+		<result column="endTime" property="endTime" jdbcType="VARCHAR" />
+		<result column="timelength" property="timelength" jdbcType="INTEGER" />
+		<result column="stotal" property="stotal" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="SubjectMap" type="com.sy.entity.Subject">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="examid" property="examid" jdbcType="INTEGER" />
+		<result column="subjectNum" property="subjectNum" jdbcType="INTEGER" />
+		<result column="subjectName" property="subjectName" jdbcType="VARCHAR" />
+		<result column="optionA" property="optionA" jdbcType="VARCHAR" />
+		<result column="optionB" property="optionB" jdbcType="VARCHAR" />
+		<result column="optionC" property="optionC" jdbcType="VARCHAR" />
+		<result column="optionD" property="optionD" jdbcType="VARCHAR" />
+		<result column="answer" property="answer" jdbcType="VARCHAR" />
+		<result column="subjectScore" property="subjectScore" jdbcType="INTEGER" />
+		<result column="subjectType" property="subjectType" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="AnswersMap" type="com.sy.entity.Answers">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="examId" property="examId" jdbcType="INTEGER" />
+		<result column="examname" property="examname" jdbcType="VARCHAR" />
+		<result column="classname" property="classname" jdbcType="VARCHAR" />
+		<result column="coursename" property="coursename" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="answers" property="answers" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 分页SQL语句 --> 
+    <select id="findECloseByPage" resultMap="ExamCloseMap"> 
+        select * 
+        from exam_close limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findECloseByClassname" resultMap="ExamCloseMap"> 
+        select * 
+        from exam_close where classname = #{classname} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findSubjectByEid" resultMap="SubjectMap"> 
+        select * 
+        from subject where eid = #{examid} order by subjectNum limit #{startPos},#{pageSize}  
+    </select> 
+    
+   
+    <insert id="addExamClose" parameterType="com.sy.entity.ExamClose" useGeneratedKeys="true" keyProperty="id">
+         insert into exam_close (exam_name,classname,coursename,start_time,end_time,timelength,stotal) values (#{examName},#{classname},#{coursename},#{startTime},#{endTime},#{timelength},#{stotal})
+    </insert> 
+    
+    <insert id="addSubject" parameterType="com.sy.entity.Subject" useGeneratedKeys="true" keyProperty="id">
+         insert into subject (eid,subjectNum,subjectName,optionA,optionB,optionC,optionD,answer,subjectScore,subjectType) values (#{examid},#{subjectNum},#{subjectName},#{optionA},#{optionB},#{optionC},#{optionD},#{answer},#{subjectScore},#{subjectType})
+    </insert> 
+    
+   
+   <!--  
+    <insert id="addAnswers" parameterType="com.sy.entity.Answers" useGeneratedKeys="true" keyProperty="id">
+         insert into answers (examname,classname,coursename,username,answers) values (#{examname},#{classname},#{coursename},#{username},#{answers})
+    </insert> 
+     -->
+	
+	<!-- 取得记录的总数 --> 
+	<select id="getECloseCount" resultType="long">
+        SELECT COUNT(*) FROM exam_close  
+	</select>
+	
+	<select id="getECloseByClassname" resultType="long">
+        SELECT COUNT(*) FROM exam_close where classname = #{classname} 
+	</select>
+	
+	<select id="getSubjectByEid" resultType="long">
+        SELECT COUNT(*) FROM subject where eid = #{examid} 
+	</select>
+	
+	
+	
+	<!-- 查询一个班级的人数 -->
+	<select id="getStotal" resultType="long">
+        SELECT COUNT(*) FROM grade where examname = #{examname} and classname = #{classname}
+	</select>
+	
+	<select id="getExamNum" resultType="long">
+        SELECT COUNT(*) FROM org_user where org_id = #{id}
+	</select>
+	
+	
+</mapper>	

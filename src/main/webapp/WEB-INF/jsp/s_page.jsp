@@ -45,34 +45,19 @@
 	    	<div class="col-sm-6">
 	                <div class="ibox float-e-margins">
 	                    <div class="ibox-title" > 
-	                        <%-- <h5><a href="getmembers?id=${data.username}">${data.username }</a></h5> --%>
-	                        <%-- <h5>${data.username }</h5> --%>
+	                        
 	                        <h5 style="float:left;width:50%">ID：<input type="text" value="<%=uid%>" style="border:none" readOnly="true"></h5>
 	                        <h5>姓名：<input type="text" value="<%=username%>" style="border:none" readOnly="true"></h5>
-	                        <!-- <div class="ibox-tools">
-	                            <a class="collapse-link">
-	                                <i class="fa fa-chevron-up"></i>
-	                            </a>
-	                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-	                                <i class="fa fa-wrench"></i>
-	                            </a>
-	                            
-	                            <a class="close-link">
-	                                <i class="fa fa-times"></i>
-	                            </a>
-	                        </div> -->
+	                        
 	                    </div>
 	                </div>
 	            </div>
            
         	<div class="col-sm-12">
         		
-        		<h5><a href="addrepos">添加个人仓库</a></h5>
+        		<h5><a href="addrepos"><button class="btn btn-primary block full-width m-b" style="width:20%!important;margin-top:20px">添加个人仓库</button></a></h5>
         	</div>
-        	<div class="col-sm-12">
-        		
-        		<h5><a href="addexam">开始考试</a></h5>
-        	</div>
+        	
         </div>
 
     </div>

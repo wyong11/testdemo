@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+ <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -21,8 +21,15 @@
     <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="layui/css/layui.css" rel="stylesheet">
+    <script src="layui/layui.js"></script>
 </head>
-
+<%
+   String username = (String) request.getSession().getAttribute("username");
+   	String classname = (String)request.getSession().getAttribute("classname");
+   String coursename = (String)request.getSession().getAttribute("coursename");
+   int stotal = (int) request.getSession().getAttribute("stotal");
+   %>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div class="row  border-bottom white-bg dashboard-header">
         <div class="col-sm-12">
@@ -34,30 +41,63 @@
 		<!--右侧部分结束-->
         <!--右侧边栏开始-->
         <div class="gray-bg" style="margin-left: 0px">
+        
+        <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        	<div class="col-sm-4">
+        		
+        	</div>
+        	<div class="col-sm-5">
+        		<h2 style="color:red">以下发布内容不涉及抄袭，违法，以及社会敏感言论</h2>
+        	</div>
+    	</div>
+   </div>
    
  <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
         	<div class="col-sm-12">
         		<div class="ibox-title">
-        			<form class="m-t" role="form" action="addMember" method="post" >
+        			<form class="m-t" role="form" action="addWork" method="post" >
 		                <div class="form-group">
-		                    <input type="text" class="form-control" placeholder="作业名" id="workname" name="workname" style="width:30%!important">
+		                    <input type="text" class="form-control" placeholder="作业名称" name="workname" style="width:30%!important">
 		                </div>
 		                <div class="form-group">
-		                	<textarea rows="6" cols="4" placeholder="作业内容" id="content" name="content" style="width:50%!important"></textarea>
-		                    <!-- <input type="text" class="form-control" placeholder="作业内容" id="content" name="content" style="width:30%!important"> -->
+		                    <input type="hidden" class="form-control" placeholder="班级名" name="classname" value=<%=classname %>>
 		                </div>
-		                <!-- <div class="form-group">
-		                    <input type="text" class="form-control" placeholder="班级描述" id="description" name="description" style="width:30%!important">
+		                <div class="form-group">
+		                    <input type="hidden" class="form-control" placeholder="课程名" name="coursename" value=<%=coursename %>>
+		                    <input type="hidden" class="form-control" placeholder="班级人数" name="stotal" value=<%=stotal %>>
+
 		                </div>
-		                 -->
-		                <button type="submit" class="btn btn-primary block full-width m-b" style="width:30%!important">添加</button>
+		                <div class="form-group">
+		                	<textarea id="workcontent" style="display: none;" name="workcontent"></textarea>
+							<script>
+								layui.use('layedit', function() { 
+									var layedit = layui.layedit;
+									//layedit.build('demo'); //建立编辑器
+									layedit.build('workcontent',{
+										height:100
+									});
+								 }); 
+							</script>
+		                	
+		                </div>
+		                <div class="form-group">
+		                    <input type="datetime" class="form-control" placeholder="发布时间" name="creattime" style="width:30%!important">
+		                </div>
+		                
+		                <button type="submit" class="btn btn-primary block full-width m-b" style="width:30%!important">确认发布</button>
 					</form>
         		</div>
         	</div>
     	</div>
    </div>
-    
+    <script>
+layui.use(['element','form'], function(){
+	  var element = layui.element;
+	  
+	});
+</script>
         
     <script src="js/jquery.min.js?v=2.1.4"></script>
     <script src="js/bootstrap.min.js?v=3.3.6"></script>

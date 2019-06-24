@@ -40,9 +40,9 @@
         <!--右侧边栏开始-->
         <div class="gray-bg" style="margin-left: 0px">
    
- <div class="wrapper wrapper-content animated fadeInRight">
+ <div class="wrapper wrapper-content animated fadeInRight" >
         
-        <div class="row">
+        <div class="row" style="overflow:scroll; height:400px;"> 
         	<div class="col-sm-12">
         		<h5 style="float:left">组织成员</h5>
         		<h5 style="margin-left:80px"><a href="addmember">添加成员</a></h5>

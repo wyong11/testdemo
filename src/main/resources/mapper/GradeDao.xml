@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.dao.GradeDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	<resultMap id="GradeMap" type="com.sy.entity.Grade">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="examname" property="examname" jdbcType="VARCHAR" />
+		<result column="classname" property="classname" jdbcType="VARCHAR" />
+		<result column="coursename" property="coursename" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="examstatus" property="examstatus" jdbcType="INTEGER" />
+		<result column="grade" property="grade" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 分页SQL语句 --> 
+    <select id="findGradeByPage" resultMap="GradeMap"> 
+        select * 
+        from grade limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findGradeByClassname" resultMap="GradeMap"> 
+        select * 
+        from grade where classname = #{classname} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findGradeByUsername" resultMap="GradeMap"> 
+        select * 
+        from grade where username = #{username} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findGradeByCE" resultMap="GradeMap"> 
+        select * 
+        from grade where classname = #{classname} and examname = #{examname} order by id limit #{startPos},#{pageSize}  
+    </select> 
+    
+    <select id="findGradeByUE" resultType="com.sy.entity.Grade"> 
+        select * 
+        from grade where username = #{username} and examname = #{examname}
+    </select> 
+    
+    
+    <insert id="addGrade" parameterType="com.sy.entity.Grade" useGeneratedKeys="true" keyProperty="id">
+         insert into grade (examname,classname,coursename,username,examstatus,grade) values (#{examname},#{classname},#{coursename},#{username},#{examstatus},#{grade})
+    </insert> 
+    
+    <update id="updateGrade" parameterType="com.sy.entity.Grade">
+         
+    	 update grade set examstatus=#{examstatus},grade=#{grade} where username=#{username} and examname=#{examname}
+    </update> 
+    
+    
+    <!-- <insert id="addFiles" parameterType="com.sy.entity.Files">
+         insert into files (classname,username,filename,filecontent) values (#{classname},#{username},#{filename},#{filecontent})
+    </insert>  -->
+    
+    <!-- <insert id="addAnswers" parameterType="com.sy.entity.Answers" useGeneratedKeys="true" keyProperty="id">
+         insert into answers (examname,classname,coursename,username,answers) values (#{examname},#{classname},#{coursename},#{username},#{answers})
+    </insert>  -->
+    
+	
+	<!-- 取得记录的总数 --> 
+	<select id="getGradeCount" resultType="long">
+        SELECT COUNT(*) FROM grade  
+	</select>
+	
+	<select id="getGCByClassname" resultType="long">
+        SELECT COUNT(*) FROM grade where classname = #{classname} 
+	</select>
+	
+	<select id="getGCByCE" resultType="long">
+        SELECT COUNT(*) FROM grade where classname = #{classname} and examname = #{examname} 
+	</select>
+	
+	<select id="getGCByUsername" resultType="long">
+        SELECT COUNT(*) FROM grade where username = #{username} 
+	</select>
+	
+	<!-- 查询一个班级的人数 -->
+	<select id="getExamNum" resultType="long">
+        SELECT COUNT(*) FROM org_user where org_id = #{id}
+	</select>
+	
+	
+</mapper>	

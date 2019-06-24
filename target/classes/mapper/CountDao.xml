@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.dao.CountDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	
+	<select id="getCountWorkStatus" resultType="long">
+        SELECT COUNT(*) FROM work_status  where username = #{username} and coursename = #{coursename} and status = #{status}
+	</select>
+	<select id="getCountWorkStatus2" resultType="long">
+        SELECT COUNT(*) FROM work_status  where username = #{username} and status = #{status}
+	</select>
+	
+	<select id="getCountSignStatus" resultType="long">
+        SELECT COUNT(*) FROM sign_status  where username = #{username} and coursename = #{coursename} and status = #{status}
+	</select>
+	<select id="getCountSignStatus2" resultType="long">
+        SELECT COUNT(*) FROM sign_status  where username = #{username} and status = #{status}
+	</select>
+	
+	<select id="getCountExamStatus" resultType="long">
+        SELECT COUNT(*) FROM grade where username = #{username} and coursename = #{coursename} and examstatus = #{status}
+	</select>
+	<select id="getCountExamStatus2" resultType="long">
+        SELECT COUNT(*) FROM grade where username = #{username} and examstatus = #{status}
+	</select>
+	
+	<select id="getCountExamScore" resultType="long">
+        SELECT COUNT(*) FROM grade where username = #{username} and coursename = #{coursename} and grade > #{grade}
+	</select>
+	<select id="getCountExamScore2" resultType="long">
+        SELECT COUNT(*) FROM grade where username = #{username} and grade > #{grade}
+	</select>
+	
+	<select id="getCountExamStotal" resultType="long">
+        SELECT COUNT(*) FROM grade where username = #{username} and coursename = #{coursename}
+	</select>
+	
+	<select id="getCountExamStotal2" resultType="long">
+        SELECT COUNT(*) FROM grade where username = #{username}
+	</select>
+	
+
+	
+</mapper>	
